@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00aede</color>
+    <color name="colorPrimaryDark">#3281da</color>
+    <color name="colorAccent">#f9e227</color>
+
+
+    <color name="blue">#00aede</color>
+    <color name="white">#ffffff</color>
+    <color name="fullTransparent">#00000000</color>
+    <color name="divider">#8c9e9e9e</color>
+    <color name="dullWhite">#9e9e9e</color>
+
+
+    <!-- Grid layout -->
+
+      <color name="darkTextColor">#1d1d26</color>
+        <color name="lightTextColor">#a8a8aa</color>
+    <color name="gridlayoutDivider">#e4e5ea</color>
+
+    <!-- list layout -->
+
+    <color name="listlayoutDivider">#f8f8f9</color>
+    <color name="listviewTextColor">#111111</color>
+    <color name="listviewSelectedTextColor">#cfcfd1</color>
+
+    <!-- Form layout -->
+
+    <color name="formDivider">#dee0e2</color>
+    <color name="FormTextColor">#1d1d26</color>
+
+
+    <!-- Navigation layout -->
+
+    <color name="navigationDivider">#dee0e2</color>
+    <color name="navigationTextColor">#1d1d26</color>
+
+</resources>

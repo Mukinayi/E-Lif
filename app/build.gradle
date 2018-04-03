@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '26.0.2'
+
+    defaultConfig {
+        applicationId "com.wolfsoft.one.com.elifouta.com.elifouta.seth.cg"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        manifestPlaceholders = [
+
+                manifestApplicationId: "${applicationId}",
+                pushbots_app_id      : "5abad5cc1db2dc58a069d695",
+                pushbots_loglevel    : "DEBUG",
+                google_sender_id     : "717738339431"
+
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+    compile files('libs/GenAsync.1.2.jar')
+    compile 'com.google.android.gms:play-services-gcm:10.2.1'
+    compile 'com.pushbots:pushbots-lib:3.0.3@aar'
+}
