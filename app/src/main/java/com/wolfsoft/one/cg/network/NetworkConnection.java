@@ -5,12 +5,21 @@ import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
+import android.view.View;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by EXACT-IT-DEV on 3/21/2018.
@@ -111,6 +120,34 @@ public class NetworkConnection {
 
     public void writeToast(String string){
         Toast.makeText(context, string,Toast.LENGTH_SHORT).show();
+    }
+
+    public Bitmap Capturer(View v){
+        v.setDrawingCacheEnabled(true);
+        v.buildDrawingCache(true);
+        Bitmap bitmap = Bitmap.createBitmap(v.getDrawingCache());
+        v.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
+    public Bitmap CapturerEcran(View v){
+        return Capturer(v.getRootView());
+    }
+
+    public void SaveScreen(Bitmap b,String nf){
+        ByteArrayOutputStream bao = null;
+        File file = null;
+        try{
+            bao = new ByteArrayOutputStream();
+            b.compress(Bitmap.CompressFormat.PNG,40,bao);
+            file = new File(Environment.getExternalStorageDirectory()+File.separator+new SimpleDateFormat("yyyy-MM-dd HH:mm:SS").format(new Date())+nf+".png");
+            file.createNewFile();
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(bao.toByteArray());
+            writeToast("Capture prise avec succès");
+        }catch (Exception e){
+            writeToast("Une erreur est survenue lors de sauvegarde");
+        }
     }
 
 }
