@@ -2,6 +2,7 @@ package com.wolfsoft.one.cg;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -20,7 +21,11 @@ import android.widget.RelativeLayout;
 
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
+import com.wolfsoft.one.cg.credits.Credits;
 import com.wolfsoft.one.cg.network.NetworkConnection;
+import com.wolfsoft.one.cg.payment.Payment;
+import com.wolfsoft.one.cg.transfert.Transfert;
+import com.wolfsoft.one.cg.virement.Virement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -108,6 +113,22 @@ public class NavigationActivity extends AppCompatActivity {
                     switch (position){
                         case 0:
                                 monsolde();
+                            break;
+                        case 1:
+                            Intent intent = new Intent(NavigationActivity.this, Virement.class);
+                            startActivity(intent);
+                            break;
+                        case 2:
+                            Intent transfert = new Intent(NavigationActivity.this, Transfert.class);
+                            startActivity(transfert);
+                            break;
+                        case 3:
+                            Intent paiement = new Intent(NavigationActivity.this, Payment.class);
+                            startActivity(paiement);
+                            break;
+                        case 4:
+                            Intent credits = new Intent(NavigationActivity.this, Credits.class);
+                            startActivity(credits);
                             break;
                     }
                     drawerLayout.closeDrawer(relativeClose);

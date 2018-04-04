@@ -26,21 +26,6 @@
                 />
 
 
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="165dp"
-                android:src="@drawable/add"
-                android:layout_gravity="right"
-                android:layout_marginRight="22dp"
-
-
-                />
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,13 +60,14 @@
                 </LinearLayout>
 
                 <customfonts.MyTextView
+                    android:id="@+id/tvfullname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginTop="12dp"
                     android:text="Add Title"
                     android:textColor="@color/white"
-                    android:textSize="30dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginLeft="22dp"/>
+                    android:textSize="30dp" />
 
 
             </LinearLayout>
@@ -94,15 +80,6 @@
                 android:layout_marginTop="210dp"
                 android:background="@color/white">
 
-
-
-                <customfonts.MyTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14dp"
-                    android:textColor="@color/lightTextColor"
-                    android:text="Short Description"
-                    android:padding="16dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -122,12 +99,11 @@
 
                     <customfonts.MyTextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:text="Description du compte"
                         android:textColor="@color/lightTextColor"
-                        android:text="All Day"
-                        />
+                        android:textSize="14dp" />
 
 
                 </LinearLayout>
@@ -143,37 +119,24 @@
                     android:paddingBottom="12dp">
 
                     <customfonts.MyTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="111dp"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:text="Compte"
                         android:textColor="@color/lightTextColor"
-                        android:text="Form"
-                        />
+                        android:textSize="14dp" />
 
 
                     <customfonts.MyTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:id="@+id/tvnumcompte"
+                        android:layout_width="232dp"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="@color/FormTextColor"
-                        android:text="February 9, 2015"
                         android:layout_gravity="center"
-                        android:gravity="center"
-                        />
-
-
-                    <customfonts.MyTextView
-                        android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:textSize="14dp"
+                        android:gravity="center"
                         android:textColor="@color/FormTextColor"
-                        android:text="9:00 AM"
-                        android:layout_gravity="right"
-                        android:gravity="right"
-                        />
+                        android:textSize="14dp" />
+
 
                 </LinearLayout>
 
@@ -188,36 +151,23 @@
 
                     <customfonts.MyTextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:text="Portable"
                         android:textColor="@color/lightTextColor"
-                        android:text="To"
-                        />
+                        android:textSize="14dp" />
 
 
                     <customfonts.MyTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:id="@+id/tvportable"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="@color/FormTextColor"
-                        android:text="February 9, 2015"
                         android:layout_gravity="center"
-                        android:gravity="center"
-                        />
-
-
-                    <customfonts.MyTextView
-                        android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:textSize="14dp"
+                        android:gravity="center"
                         android:textColor="@color/FormTextColor"
-                        android:text="10:30 AM"
-                        android:layout_gravity="right"
-                        android:gravity="right"
-                        />
+                        android:textSize="14dp" />
+
 
                 </LinearLayout>
 
@@ -238,33 +188,23 @@
                     >
 
                     <customfonts.MyTextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="101dp"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="@color/lightTextColor"
-                        android:text="Location"
                         android:layout_gravity="center"
-                        />
-
-
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/mouse_cursor"
-                        android:layout_marginRight="16dp"
-                        />
+                        android:layout_weight="1"
+                        android:text="Adresse"
+                        android:textColor="@color/lightTextColor"
+                        android:textSize="14dp" />
 
 
                     <customfonts.MyTextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvadresse"
+                        android:layout_width="216dp"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="@color/FormTextColor"
-                        android:text="StarBucks"
                         android:layout_gravity="center"
                         android:gravity="right"
-                        />
+                        android:textColor="@color/FormTextColor"
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -288,26 +228,22 @@
 
                     <customfonts.MyTextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="@color/lightTextColor"
-                        android:text="Notification"
                         android:layout_gravity="center"
-                        />
-
-
+                        android:layout_weight="1"
+                        android:text="Type de compte"
+                        android:textColor="@color/lightTextColor"
+                        android:textSize="14dp" />
 
 
                     <customfonts.MyTextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvaccounttype"
+                        android:layout_width="179dp"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="@color/FormTextColor"
-                        android:text="Vai Email"
                         android:layout_gravity="center"
                         android:gravity="right"
-                        />
+                        android:textColor="@color/FormTextColor"
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
@@ -328,20 +264,35 @@
 
                     <customfonts.MyTextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Microfinance"
                         android:textColor="@color/lightTextColor"
-                        android:text="Location"
-                        android:layout_gravity="center"
-                        />
+                        android:textSize="14dp" />
 
 
                     <com.github.siyamed.shapeimageview.CircularImageView
 
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/tomcruise"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="8dp"
+
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_lifouta"
+                        app:siBorderColor="#cccccc"
+
+                        app:siBorderWidth="1dp" />
+
+
+                    <com.github.siyamed.shapeimageview.CircularImageView
+
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/ic_lifouta"
                         android:layout_gravity="center"
                         android:clickable="true"
                         android:gravity="center"
@@ -352,27 +303,11 @@
 
                         />
 
-
                     <com.github.siyamed.shapeimageview.CircularImageView
 
                         android:layout_width="45dp"
                         android:layout_height="45dp"
-                        android:src="@drawable/skarlet"
-                        android:layout_gravity="center"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:scaleType="centerCrop"
-                        app:siBorderWidth="1dp"
-                        app:siBorderColor="#cccccc"
-                        android:layout_marginRight="8dp"
-
-                        />
-
-                    <com.github.siyamed.shapeimageview.CircularImageView
-
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:src="@drawable/sunny"
+                        android:src="@drawable/ic_lifouta"
                         android:layout_gravity="center"
                         android:clickable="true"
                         android:gravity="center"
@@ -402,26 +337,22 @@
 
                     <customfonts.MyTextView
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="@color/lightTextColor"
-                        android:text="Repeat"
                         android:layout_gravity="center"
-                        />
-
-
+                        android:layout_weight="1"
+                        android:text="Service client Lifouta"
+                        android:textColor="@color/lightTextColor"
+                        android:textSize="14dp" />
 
 
                     <customfonts.MyTextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="202dp"
                         android:layout_height="wrap_content"
-                        android:textSize="14dp"
-                        android:textColor="@color/FormTextColor"
-                        android:text="Monthly"
                         android:layout_gravity="center"
                         android:gravity="right"
-                        />
+                        android:text="Contact: +242053108456"
+                        android:textColor="@color/FormTextColor"
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 

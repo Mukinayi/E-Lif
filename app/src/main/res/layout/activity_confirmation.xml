@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.wolfsoft.one.cg.payment.Confirmation"
+android:background="@drawable/signup_background">
+
+<ScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/ifuta" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:padding="12dp"
+            android:text="Confirmation Paiement"
+            android:textColor="@color/dullWhite"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/etOTPconf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/fullTransparent"
+            android:drawableLeft="@drawable/ic_avatar"
+            android:drawablePadding="8dp"
+            android:hint="OTP"
+            android:inputType="numberPassword"
+            android:padding="12dp"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/textSize" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/divider"></LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnOTPconf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="Confirmer"
+            android:textColor="@color/white" />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textColor="#fff"
+            android:text="@string/nosms"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageButton
+            android:layout_marginTop="20dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/imgbtnresendotp"
+            android:background="@drawable/resend"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+
+
+
+</ScrollView>
+
+</RelativeLayout>
+

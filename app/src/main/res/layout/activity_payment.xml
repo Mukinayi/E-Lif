@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context="com.wolfsoft.one.cg.virement.Virement"
+tools:context="com.wolfsoft.one.cg.payment.Payment"
 android:background="@drawable/signup_background">
 
 <ScrollView
@@ -21,14 +21,25 @@ android:background="@drawable/signup_background">
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_height="211dp"
             android:layout_above="@+id/linearLayout"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ifuta" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:padding="12dp"
+            android:text="Paiement"
+            android:textColor="@color/dullWhite"
+            android:textSize="30sp" />
+
 
         <EditText
-            android:id="@+id/etrecipient"
+            android:id="@+id/etReciNumcompte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
@@ -47,7 +58,7 @@ android:background="@drawable/signup_background">
             android:background="@color/divider"></LinearLayout>
 
         <EditText
-            android:id="@+id/etvirementamount"
+            android:id="@+id/etMontant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
@@ -66,7 +77,26 @@ android:background="@drawable/signup_background">
             android:background="@color/divider"></LinearLayout>
 
         <EditText
-            android:id="@+id/etsenderpin"
+            android:id="@+id/etMotif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:background="@color/fullTransparent"
+            android:drawableLeft="@drawable/ic_avatar"
+            android:drawablePadding="8dp"
+            android:hint="@string/reason"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/textSize" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/divider"></LinearLayout>
+
+        <EditText
+            android:id="@+id/etPin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
@@ -86,7 +116,7 @@ android:background="@drawable/signup_background">
 
 
         <Button
-            android:id="@+id/btnvirement"
+            android:id="@+id/btnVal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -116,4 +146,5 @@ android:background="@drawable/signup_background">
 </ScrollView>
 
 </RelativeLayout>
+
 

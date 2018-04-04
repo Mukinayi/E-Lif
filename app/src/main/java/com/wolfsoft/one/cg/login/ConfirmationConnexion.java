@@ -68,42 +68,47 @@ public class ConfirmationConnexion extends AppCompatActivity {
                             PostResponseAsyncTask poste = new PostResponseAsyncTask(ConfirmationConnexion.this, dt, false, new AsyncResponse() {
                                 @Override
                                 public void processFinish(String s) {
-                                    switch (s){
-                                        case "180":
-                                            Toast.makeText(getApplicationContext(),"Code session incorrecte",Toast.LENGTH_SHORT).show();
-                                            progressDialog.dismiss();
-                                            break;
-                                        case "181":
-                                            Toast.makeText(getApplicationContext(),"Code session déjà utilisé",Toast.LENGTH_SHORT).show();
-                                            progressDialog.dismiss();
-                                            break;
-                                        case "182":
-                                            Toast.makeText(getApplicationContext(),"Erreur connexion",Toast.LENGTH_SHORT).show();
-                                            progressDialog.dismiss();
-                                            break;
-                                        case "":
-                                            Toast.makeText(getApplicationContext(),"Aucune reponse du serveur",Toast.LENGTH_SHORT).show();
-                                            progressDialog.dismiss();
-                                            break;
-                                        default:
-                                            //Save JSON datas
-                                            try {
-                                                JSONArray jsonArray = new JSONArray(s);
-                                                JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                                if(networkConnection.saveProfile(jsonObject.getString("devicestate"),jsonObject.getString("numcompte"),jsonObject.getString("portablecli"),jsonObject.getString("typeaccount"),jsonObject.getString("prenomcli"),jsonObject.getString("nomcli"),jsonObject.getString("adressecli"),jsonObject.getString("currency"),jsonObject.getString("idcompte"))){
-                                                    Toast.makeText(getApplicationContext(),"Donnée sauvegardées avec succès",Toast.LENGTH_LONG).show();
-                                                    progressDialog.dismiss();
-                                                    Intent main = new Intent(ConfirmationConnexion.this, NavigationActivity.class);
-                                                    startActivity(main);
-                                                    ActivityCompat.finishAffinity(ConfirmationConnexion.this);
-                                                }else{
-
-                                                }
-                                            }catch (JSONException e){
-                                                Toast.makeText(getApplicationContext(),"Erreur donnée JSON",Toast.LENGTH_SHORT).show();
+                                    try {
+                                        switch (s){
+                                            case "180":
+                                                Toast.makeText(getApplicationContext(),"Code session incorrecte",Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
-                                            }
-                                            break;
+                                                break;
+                                            case "181":
+                                                Toast.makeText(getApplicationContext(),"Code session déjà utilisé",Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                break;
+                                            case "182":
+                                                Toast.makeText(getApplicationContext(),"Erreur connexion",Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                break;
+                                            case "":
+                                                Toast.makeText(getApplicationContext(),"Aucune reponse du serveur",Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                break;
+                                            default:
+                                                //Save JSON datas
+                                                try {
+                                                    JSONArray jsonArray = new JSONArray(s);
+                                                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                                                    if(networkConnection.saveProfile(jsonObject.getString("devicestate"),jsonObject.getString("numcompte"),jsonObject.getString("portablecli"),jsonObject.getString("typeaccount"),jsonObject.getString("prenomcli"),jsonObject.getString("nomcli"),jsonObject.getString("adressecli"),jsonObject.getString("currency"),jsonObject.getString("idcompte"))){
+                                                        Toast.makeText(getApplicationContext(),"Donnée sauvegardées avec succès",Toast.LENGTH_LONG).show();
+                                                        progressDialog.dismiss();
+                                                        Intent main = new Intent(ConfirmationConnexion.this, NavigationActivity.class);
+                                                        startActivity(main);
+                                                        ActivityCompat.finishAffinity(ConfirmationConnexion.this);
+                                                    }else{
+
+                                                    }
+                                                }catch (JSONException e){
+                                                    Toast.makeText(getApplicationContext(),"Erreur donnée JSON",Toast.LENGTH_SHORT).show();
+                                                    progressDialog.dismiss();
+                                                }
+                                                break;
+                                        }
+                                    }catch (Exception e){
+                                        Toast.makeText(getApplicationContext(),"Aucune réponse du serveur",Toast.LENGTH_SHORT).show();
+                                        progressDialog.dismiss();
                                     }
                                 }
                             });
@@ -116,6 +121,50 @@ public class ConfirmationConnexion extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Erreur connexion internet",Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
+                }
+            }
+        });
+
+        imgbtnresend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog.show();
+                HashMap smsdt = new HashMap();
+                smsdt.put("numcompte",numcompte);
+                if(networkConnection.isConnected()){
+                    try {
+                        PostResponseAsyncTask smsres = new PostResponseAsyncTask(ConfirmationConnexion.this, smsdt, false, new AsyncResponse() {
+                            @Override
+                            public void processFinish(String s) {
+                                try {
+                                    switch (s){
+                                        case "180":
+                                            Toast.makeText(getApplicationContext(),"Aucune session enregistrée",Toast.LENGTH_SHORT).show();
+                                            progressDialog.dismiss();
+                                            break;
+                                        case "201":
+                                            Toast.makeText(getApplicationContext(),"Echec renvoi SMS",Toast.LENGTH_SHORT).show();
+                                            progressDialog.dismiss();
+                                            break;
+                                        default:
+                                            Toast.makeText(getApplicationContext(),"SMS renvoyé avec succès",Toast.LENGTH_SHORT).show();
+                                            progressDialog.dismiss();
+                                            break;
+                                    }
+                                }catch (Exception e){
+                                    Toast.makeText(getApplicationContext(),"Aucune reponse du serveur",Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                }
+                            }
+                        });
+                        smsres.execute(URL+"/lifoutacourant/WEBAPIS/resendsmslogin.php");
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(),"Erreur du serveur",Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(),"Erreur connexion internet",Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
             }
         });

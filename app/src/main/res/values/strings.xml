@@ -7,4 +7,10 @@
     <string name="copyright">Powered by : EXACT IT SA</string>
     <string name="forgotpin">PIN oublié, veuillez contacter le service client Lifouta</string>
     <string name="nosms">OTP non réçu? veuillez cliquer pour renvoyer</string>
+    <string name="recipientnum">Numéro du compe bénéficiaire</string>
+    <string name="amount">Montant</string>
+    <string name="pinlif">PIN Lifouta</string>
+    <string name="valider">Valider</string>
+    <string name="login">Se connecter</string>
+    <string name="reason">Motif du paiement</string>
 </resources>

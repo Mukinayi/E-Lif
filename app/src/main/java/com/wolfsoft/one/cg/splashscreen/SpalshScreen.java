@@ -84,25 +84,30 @@ public class SpalshScreen extends AppCompatActivity {
                 PostResponseAsyncTask tache = new PostResponseAsyncTask(this, dt, false, new AsyncResponse() {
                     @Override
                     public void processFinish(String s) {
-                        switch (s){
-                            case "180":
-                                Toast.makeText(getApplicationContext(),"Appareil non encore connecté",Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(SpalshScreen.this, Login.class);
-                                startActivity(i);
-                                finish();
-                                break;
-                            case "181":
-                                Toast.makeText(getApplicationContext(),"Dispositif désactivé",Toast.LENGTH_SHORT).show();
-                                Intent it = new Intent(SpalshScreen.this, NoImei.class);
-                                it.putExtra("message","Dispositif désactivé");
-                                startActivity(it);
-                                finish();
-                                break;
-                            default:
-                                Intent main = new Intent(SpalshScreen.this,NavigationActivity.class);
-                                startActivity(main);
-                                finish();
-                                break;
+                        try {
+                            switch (s){
+                                case "180":
+                                    Toast.makeText(getApplicationContext(),"Appareil non encore connecté",Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(SpalshScreen.this, Login.class);
+                                    startActivity(i);
+                                    finish();
+                                    break;
+                                case "181":
+                                    Toast.makeText(getApplicationContext(),"Dispositif désactivé",Toast.LENGTH_SHORT).show();
+                                    Intent it = new Intent(SpalshScreen.this, NoImei.class);
+                                    it.putExtra("message","Dispositif désactivé");
+                                    startActivity(it);
+                                    finish();
+                                    break;
+                                default:
+                                    Intent main = new Intent(SpalshScreen.this,NavigationActivity.class);
+                                    startActivity(main);
+                                    finish();
+                                    break;
+                            }
+                        }catch (Exception e){
+                            networkConnection.writeToast("Aucune réponse du serveur");
+                            finish();
                         }
                     }
                 });
