@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.MainActivity;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
+import com.wolfsoft.one.cg.NavigationActivity;
 import com.wolfsoft.one.cg.R;
 import com.wolfsoft.one.cg.network.NetworkConnection;
 
@@ -117,7 +118,7 @@ public class Transfert extends AppCompatActivity {
                                                     alb.setPositiveButton("Terminer", new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
-                                                            Intent intent = new Intent(Transfert.this, MainActivity.class);
+                                                            Intent intent = new Intent(Transfert.this, NavigationActivity.class);
                                                             startActivity(intent);
                                                             finish();
                                                         }

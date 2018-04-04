@@ -53,7 +53,8 @@ public class NavigationActivity extends AppCompatActivity {
     private ArrayList<NavigationItems> items;
 
 
-    private String[] NAME = {"Mon solde", "Virement" , "Transfert", "Payer", "Crédits Téléphone", "Services Publics"
+    private String[] NAME = {"Mon solde", "Virement" , "Transfert", "Payer", "Crédits Téléphone", "Demande crédit","Compte Epargne",
+            "Paiement SNE","Paiement SNDE","Bouquets numériques"
            };
 
 
@@ -257,8 +258,8 @@ public class NavigationActivity extends AppCompatActivity {
                                     dialog.show();
                                     LinearLayout relativeLayout = (LinearLayout) findViewById(R.id.hf);
 
-                                    Bitmap b = networkConnection.Capturer(relativeLayout);
-                                    networkConnection.SaveScreen(b,"SOLDE");
+                                    //Bitmap b = networkConnection.Capturer(relativeLayout);
+                                    //networkConnection.SaveScreen(b,"SOLDE");
 
 
                                     break;
