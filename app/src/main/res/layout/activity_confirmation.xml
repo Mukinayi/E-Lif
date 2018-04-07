@@ -44,6 +44,7 @@ android:background="@drawable/signup_background">
             android:hint="OTP"
             android:inputType="numberPassword"
             android:padding="12dp"
+            android:textColor="#fff"
             android:textColorHint="@color/white"
             android:textSize="@dimen/textSize" />
         <LinearLayout

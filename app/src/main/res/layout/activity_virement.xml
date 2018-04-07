@@ -38,6 +38,7 @@ android:background="@drawable/signup_background">
             android:hint="@string/recipientnum"
             android:inputType="number"
             android:padding="12dp"
+            android:textColor="#fff"
             android:textColorHint="@color/white"
             android:textSize="@dimen/textSize" />
 
@@ -57,6 +58,7 @@ android:background="@drawable/signup_background">
             android:hint="@string/amount"
             android:inputType="numberDecimal"
             android:padding="12dp"
+            android:textColor="#fff"
             android:textColorHint="@color/white"
             android:textSize="@dimen/textSize" />
 
@@ -76,6 +78,7 @@ android:background="@drawable/signup_background">
             android:hint="@string/pinlif"
             android:inputType="numberPassword"
             android:padding="12dp"
+            android:textColor="#fff"
             android:textColorHint="@color/white"
             android:textSize="@dimen/textSize" />
 
