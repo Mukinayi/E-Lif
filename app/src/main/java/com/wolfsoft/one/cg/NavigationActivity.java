@@ -1,6 +1,7 @@
 package com.wolfsoft.one.cg;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -210,7 +211,26 @@ public class NavigationActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        alb = new AlertDialog.Builder(NavigationActivity.this);
+        alb.setTitle("Message interactif");
+        alb.setMessage("Voulez-vous vraiment quitter l\'application Lifouta ?");
+        alb.setCancelable(false);
+        alb.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
 
+        alb.setNeutralButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog = alb.create();
+        dialog.show();
     }
 
     public void monsolde(){

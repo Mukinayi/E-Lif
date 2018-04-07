@@ -54,9 +54,9 @@ public class ConfirmationConnexion extends AppCompatActivity {
                 HashMap dt = new HashMap();
                 dt.put("logincode",etLoginCode.getText().toString());
                 dt.put("numcompte",numcompte);
-                dt.put("deviceimei",networkConnection.getImeiNumber());
-                dt.put("devicename",networkConnection.getDeviceName());
-                dt.put("devicemodel",networkConnection.getDeviceName());
+                dt.put("deviceimei","362523432421083");
+                dt.put("devicename","SAMSUNG S6");
+                dt.put("devicemodel","SAMSUNG S6");
 
                 if(etLoginCode.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(),"Veuillez renseigner le code OTP", Toast.LENGTH_SHORT).show();

@@ -37,7 +37,8 @@ public class Login extends AppCompatActivity {
         progressDialog.setMessage("Traitement...");
         networkConnection = new NetworkConnection(this);
         final String URL = networkConnection.getUrl();
-        final String IMEI = networkConnection.getImeiNumber();
+        //final String IMEI = networkConnection.getImeiNumber();
+        final String IMEI = "362523432421083";
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,26 +57,31 @@ public class Login extends AppCompatActivity {
                             PostResponseAsyncTask poste = new PostResponseAsyncTask(Login.this, datas, false, new AsyncResponse() {
                                 @Override
                                 public void processFinish(String s) {
-                                    switch (s){
-                                        case "180":
-                                            Toast.makeText(getApplicationContext(),"Compte Lifouta non reconnu",Toast.LENGTH_SHORT).show();
-                                            progressDialog.dismiss();
-                                            break;
-                                        case "181":
-                                            Toast.makeText(getApplicationContext(),"Pin Lifouta incorrecte",Toast.LENGTH_SHORT).show();
-                                            progressDialog.dismiss();
-                                            break;
+                                    try {
+                                        switch (s){
+                                            case "180":
+                                                Toast.makeText(getApplicationContext(),"Compte Lifouta non reconnu",Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                break;
+                                            case "181":
+                                                Toast.makeText(getApplicationContext(),"Pin Lifouta incorrecte",Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                break;
 
-                                        case "":
-                                            Toast.makeText(getApplicationContext(),"Aucune reponse du serveur",Toast.LENGTH_SHORT).show();
-                                            progressDialog.dismiss();
-                                            break;
-                                        default:
-                                            Intent conf = new Intent(Login.this,ConfirmationConnexion.class);
-                                            conf.putExtra("numcompte",etLoginNumcompte.getText().toString());
-                                            startActivity(conf);
-                                            finish();
-                                            break;
+                                            case "":
+                                                Toast.makeText(getApplicationContext(),"Aucune reponse du serveur",Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                                break;
+                                            default:
+                                                Intent conf = new Intent(Login.this,ConfirmationConnexion.class);
+                                                conf.putExtra("numcompte",etLoginNumcompte.getText().toString());
+                                                startActivity(conf);
+                                                finish();
+                                                break;
+                                        }
+                                    }catch (Exception e){
+                                        Toast.makeText(getApplicationContext(),"Une erreur est survenue",Toast.LENGTH_SHORT).show();
+                                        progressDialog.dismiss();
                                     }
                                 }
                             });

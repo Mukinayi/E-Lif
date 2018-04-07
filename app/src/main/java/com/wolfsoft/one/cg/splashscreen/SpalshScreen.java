@@ -2,6 +2,7 @@ package com.wolfsoft.one.cg.splashscreen;
 
 import android.Manifest;
 import android.app.Service;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,17 +15,19 @@ import android.widget.Toast;
 
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
 import com.wolfsoft.one.cg.NavigationActivity;
 import com.wolfsoft.one.cg.R;
 import com.wolfsoft.one.cg.login.Login;
 import com.wolfsoft.one.cg.network.NetworkConnection;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SpalshScreen extends AppCompatActivity {
     NetworkConnection networkConnection;
-    AlertDialog.Builder al;
-    AlertDialog dialog;
+    String imei;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,47 +38,63 @@ public class SpalshScreen extends AppCompatActivity {
         final String numcompte = networkConnection.storedDatas("numcompte");
         final String idcompte = networkConnection.storedDatas("idcompte");
         TelephonyManager tm = (TelephonyManager) getSystemService(Service.TELEPHONY_SERVICE);
-        al = new AlertDialog.Builder(SpalshScreen.this);
-        al.setTitle("Message");
-        StringBuilder stb = new StringBuilder();
-        stb.append("Vous devez donnez l'autorisation à l'application d'avoir accès au téléphone");
-        al.setMessage(stb.toString());
-        al.setPositiveButton("Parametres", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
-                finish();
-            }
-        });
-        al.setCancelable(false);
-
-        String imei = "";
         final String URL = networkConnection.getUrl();
 
-        try {
-            if (tm != null) {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-                            if(tm.getDeviceId()==null){
-                                Intent noi = new Intent(SpalshScreen.this,NoImei.class);
-                                noi.putExtra("message","Dispositif sans imei");
-                                startActivity(noi);
-                                finish();
-                            }else{
-                                imei = tm.getDeviceId();
-                            }
-                        }else{
-                            dialog = al.create();
-                            dialog.show();
-                        }
-
-                }else{
-
+        if(ActivityCompat.checkSelfPermission(this,Manifest.permission.READ_PHONE_STATE)!=PackageManager.PERMISSION_GRANTED){
+            Permissions.check(SpalshScreen.this, new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, "Vous allez devoir autoriser quelques permissions, cliquer sur OK pour voir ces permissions ", new Permissions.Options().setSettingsDialogTitle("Avertissement!").setRationaleDialogTitle("Autorisation accès"), new PermissionHandler() {
+                @Override
+                public void onGranted() {
+                    imei = networkConnection.getImeiNumber();
+                    if(imei!=null){
+                        checkImei(imei);
+                    }else{
+                        noImei();
+                    }
                 }
 
-        }catch (Exception e){
-            networkConnection.writeToast("Veuillez données à l'application les permissions requise");
+                @Override
+                public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+                    finish();
+                    super.onDenied(context, deniedPermissions);
+                }
+
+                @Override
+                public boolean onBlocked(Context context, ArrayList<String> blockedList) {
+                    finish();
+                    return super.onBlocked(context, blockedList);
+                }
+
+                @Override
+                public void onJustBlocked(Context context, ArrayList<String> justBlockedList, ArrayList<String> deniedPermissions) {
+                    finish();
+                    super.onJustBlocked(context, justBlockedList, deniedPermissions);
+                }
+            });
+        }else{
+            imei = networkConnection.getImeiNumber();
+            if(imei!=null){
+                checkImei(imei);
+            }else{
+                noImei();
+            }
         }
 
+        //String imei = "362523432421083";
+
+    }
+
+    public void noImei(){
+            Intent noi = new Intent(SpalshScreen.this,NoImei.class);
+            noi.putExtra("message","Dispositif sans IMEI\n Avec un dispositif sans imei, il est impossible de se connecter au Système Lifouta");
+            startActivity(noi);
+    }
+
+    public void checkImei(String imei){
+        networkConnection = new NetworkConnection(this);
+        final String numcompte = networkConnection.storedDatas("numcompte");
+        final String idcompte = networkConnection.storedDatas("idcompte");
+        TelephonyManager tm = (TelephonyManager) getSystemService(Service.TELEPHONY_SERVICE);
+        final String URL = networkConnection.getUrl();
         HashMap dt = new HashMap();
         dt.put("deviceimei",imei);
         if(numcompte!=null){
@@ -124,6 +143,5 @@ public class SpalshScreen extends AppCompatActivity {
             startActivity(i);
             finish();
         }
-
     }
 }

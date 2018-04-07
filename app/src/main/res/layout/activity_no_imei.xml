@@ -6,21 +6,15 @@
     tools:context="com.wolfsoft.one.cg.splashscreen.NoImei"
     android:background="@drawable/signup_background">
 
-    <LinearLayout
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@drawable/radius"
-        android:alpha="0.1"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/tvMess"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="#fff"
-            android:textSize="20sp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tvMess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:alpha="1"
+        android:text="Noimei"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:gravity="center_horizontal"/>
 
 </LinearLayout>
