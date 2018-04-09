@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.wolfsoft.one.com.elifouta.com.elifouta.seth.cg"
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -39,6 +39,5 @@ dependencies {
     compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
     compile files('libs/GenAsync.1.2.jar')
     compile 'com.google.android.gms:play-services-gcm:10.2.1'
-    compile 'com.pushbots:pushbots-lib:3.0.3@aar'
     compile 'com.nabinbhandari.android:permissions:3.5'
 }

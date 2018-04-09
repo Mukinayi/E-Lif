@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,9 +55,9 @@ public class ConfirmationConnexion extends AppCompatActivity {
                 HashMap dt = new HashMap();
                 dt.put("logincode",etLoginCode.getText().toString());
                 dt.put("numcompte",numcompte);
-                dt.put("deviceimei","362523432421083");
-                dt.put("devicename","SAMSUNG S6");
-                dt.put("devicemodel","SAMSUNG S6");
+                dt.put("deviceimei",networkConnection.getImeiNumber());
+                dt.put("devicename",networkConnection.getDeviceName());
+                dt.put("devicemodel",networkConnection.getDeviceName());
 
                 if(etLoginCode.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(),"Veuillez renseigner le code OTP", Toast.LENGTH_SHORT).show();
@@ -79,14 +80,15 @@ public class ConfirmationConnexion extends AppCompatActivity {
                                                 progressDialog.dismiss();
                                                 break;
                                             case "182":
-                                                Toast.makeText(getApplicationContext(),"Erreur connexion",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(),"Ce téléphone est déjà relié à Lifouta",Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
                                                 break;
                                             case "":
-                                                Toast.makeText(getApplicationContext(),"Aucune reponse du serveur",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(),"Aucune réponse du serveurs",Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
                                                 break;
                                             default:
+
                                                 //Save JSON datas
                                                 try {
                                                     JSONArray jsonArray = new JSONArray(s);
@@ -106,6 +108,7 @@ public class ConfirmationConnexion extends AppCompatActivity {
                                                 }
                                                 break;
                                         }
+                                        Log.i("seth",s);
                                     }catch (Exception e){
                                         Toast.makeText(getApplicationContext(),"Aucune réponse du serveur",Toast.LENGTH_SHORT).show();
                                         progressDialog.dismiss();
