@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 import com.wolfsoft.one.cg.credits.Credits;
+import com.wolfsoft.one.cg.epargne.MainActivity;
 import com.wolfsoft.one.cg.network.NetworkConnection;
 import com.wolfsoft.one.cg.payment.Payment;
 import com.wolfsoft.one.cg.transfert.Transfert;
@@ -131,6 +132,16 @@ public class NavigationActivity extends AppCompatActivity {
                         case 4:
                             Intent credits = new Intent(NavigationActivity.this, Credits.class);
                             startActivity(credits);
+                            break;
+
+                        case 5:
+                            //Intent demandescredit = new Intent(NavigationActivity.this, Credits.class);
+                            //startActivity(demandescredit);
+                            break;
+
+                        case 6:
+                            Intent epargne = new Intent(NavigationActivity.this, MainActivity.class);
+                            startActivity(epargne);
                             break;
                     }
                     drawerLayout.closeDrawer(relativeClose);
