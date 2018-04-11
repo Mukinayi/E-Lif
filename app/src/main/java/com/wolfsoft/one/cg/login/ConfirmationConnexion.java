@@ -83,8 +83,8 @@ public class ConfirmationConnexion extends AppCompatActivity {
                                                 Toast.makeText(getApplicationContext(),"Ce téléphone est déjà relié à Lifouta",Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
                                                 break;
-                                            case "":
-                                                Toast.makeText(getApplicationContext(),"Aucune réponse du serveurs",Toast.LENGTH_SHORT).show();
+                                            case "183":
+                                                Toast.makeText(getApplicationContext(),"Erreur connexion au compte",Toast.LENGTH_SHORT).show();
                                                 progressDialog.dismiss();
                                                 break;
                                             default:

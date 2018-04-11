@@ -150,4 +150,17 @@ public class NetworkConnection {
         }
     }
 
+    public boolean saveSavinsData(String saccount, String savingid){
+        try {
+            storage = context.getSharedPreferences(LIFOUTA_MEMORY,Context.MODE_PRIVATE).edit();
+            storage.putString("saccount",saccount);
+            storage.putString("savingid",savingid);
+            storage.commit();
+            return true;
+        }catch (Exception e){
+            Toast.makeText(context,"Erreur stockage",Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+
 }
