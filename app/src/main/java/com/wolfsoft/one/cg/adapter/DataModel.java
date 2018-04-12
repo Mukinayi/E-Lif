@@ -1,55 +1,55 @@
 package com.wolfsoft.one.cg.adapter;
 
 /**
- * Created by EXACT-IT-DEV on 4/11/2018.
+ * Created by EXACT-IT-DEV on 1/29/2018.
  */
 
 public class DataModel {
-    private String productname;
-    private String minsolde;
-    private String interet;
-    private String echeance;
+    String txtproduct;
+    String txtminsolde;
+    String txtinteret;
 
 
-    public DataModel() {
+
+    String txtecheance;
+
+    public DataModel(String txtproduct, String txtminsolde, String txtinteret, String txtecheance) {
+        this.txtproduct = txtproduct;
+        this.txtminsolde = txtminsolde;
+        this.txtinteret = txtinteret;
+        this.txtecheance = txtecheance;
     }
 
-    public DataModel(String productname, String minsolde, String interet, String echeance) {
-        this.productname = productname;
-        this.minsolde = minsolde;
-        this.interet = interet;
-        this.echeance = echeance;
+    public String getTxtproduct() {
+        return txtproduct;
     }
 
-    public String getProductname() {
-        return productname;
+    public void setTxtproduct(String txtproduct) {
+        this.txtproduct = txtproduct;
     }
 
-    public void setProductname(String productname) {
-        this.productname = productname;
+    public String getTxtminsolde() {
+        return txtminsolde;
     }
 
-    public String getMinsolde() {
-        return minsolde;
+    public void setTxtminsolde(String txtminsolde) {
+        this.txtminsolde = txtminsolde;
     }
 
-    public void setMinsolde(String minsolde) {
-        this.minsolde = minsolde;
+    public String getTxtinteret() {
+        return txtinteret;
     }
 
-    public String getInteret() {
-        return interet;
+    public void setTxtinteret(String txtinteret) {
+        this.txtinteret = txtinteret;
     }
 
-    public void setInteret(String interet) {
-        this.interet = interet;
+    public String getTxtecheance() {
+        return txtecheance;
     }
 
-    public String getEcheance() {
-        return echeance;
+    public void setTxtecheance(String txtecheance) {
+        this.txtecheance = txtecheance;
     }
 
-    public void setEcheance(String echeance) {
-        this.echeance = echeance;
-    }
 }
