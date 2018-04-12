@@ -95,7 +95,7 @@ public class Fragment_produits extends Fragment {
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 DataModel dataModel = dataModels.get(position);
                                                 StringBuilder stb = new StringBuilder();
-                                                alb.setTitle("Epargne "+dataModel.getTxtproduct());
+                                                alb.setTitle(dataModel.getTxtproduct());
                                                 stb.append("Solde Minimum : "+dataModel.getTxtminsolde()+"\n");
                                                 stb.append("Taux d\'intérêt : "+dataModel.getTxtinteret() +"\n");
                                                 stb.append("Rémunéré après chaque : " +dataModel.getTxtecheance());
