@@ -4,14 +4,142 @@
     android:layout_height="match_parent"
     tools:context="com.wolfsoft.one.cg.epargne.Fragment_autres"
     android:orientation="vertical"
+    android:id="@+id/fgautre"
     android:padding="5dp"
     android:background="@drawable/signup_background">
+    <!--Choisir une option-->
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/chooseoption"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:padding="12dp"
+            android:text="Choisir une action"
+            android:textColor="@color/dullWhite"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/spinneroption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="#fff"
+            android:inputType="textPersonName"
+            android:padding="6dp"
+            android:textColor="#fff"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/textSize" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/divider"></LinearLayout>
+
+
+        <Button
+            android:id="@+id/btnchoose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="Ok"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+
+    <!--Rélier un compte-->
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/linksaccount"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:padding="12dp"
+            android:text="Connexion au compte Epargne"
+            android:textColor="@color/dullWhite"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/etsaccusername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:background="@color/fullTransparent"
+            android:drawableLeft="@drawable/ic_avatar"
+            android:drawablePadding="8dp"
+            android:hint="Utilisateur"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textColor="#fff"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/textSize" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/divider"></LinearLayout>
+
+        <EditText
+            android:id="@+id/etsaccpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:background="@color/fullTransparent"
+            android:drawableLeft="@drawable/ic_avatar"
+            android:drawablePadding="8dp"
+            android:hint="Mot de passe"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColor="#fff"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/textSize" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/divider"></LinearLayout>
+
+
+        <Button
+            android:layout_marginTop="8dp"
+            android:id="@+id/btnlinksaccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="Connexion"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/signsaccount"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
@@ -253,6 +381,53 @@
         </ScrollView>
 
     </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainlay"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:background="@color/white">
+
+        <ScrollView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_horizontal"
+                    android:padding="12dp"
+                    android:text="Mon compte Epargne"
+                    android:textColor="@color/dullWhite"
+                    android:textSize="25sp" />
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:drawableLeft="@drawable/ic_solde"
+                    android:drawablePadding="8dp"
+                    android:textColor="#fff"
+                    android:textSize="15sp"
+                    android:text="Mon solde"
+                    android:background="@color/blue"
+                    android:paddingRight="5dp"/>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
 
 
 

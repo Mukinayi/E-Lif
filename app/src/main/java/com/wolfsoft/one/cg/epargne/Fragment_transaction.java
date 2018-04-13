@@ -28,11 +28,11 @@ public class Fragment_transaction extends Fragment {
         TextView labelMessage = (TextView)ftransactions.findViewById(R.id.labelMessage);
         networkConnection = new NetworkConnection(context);
         if(networkConnection.storedDatas("borrowerid")==null){
-            labelMessage.setText("Veuillez rélier un ");
+            labelMessage.setText("Veuillez rélier un compte ou en créer");
             labelMessage.setTextSize(17f);
         }else{
             if(networkConnection.storedDatas("savingid")==null){
-                labelMessage.setText("Veuillez rélier un produit d\'épargne au ");
+                labelMessage.setText("Veuillez rélier un produit d\'épargne");
                 labelMessage.setTextSize(17f);
             }else {
                 labelMessage.setText("Effectuer une transaction");
