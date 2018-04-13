@@ -150,10 +150,10 @@ public class NetworkConnection {
         }
     }
 
-    public boolean saveSavinsData(String saccount, String savingid){
+    public boolean saveSavinsData(String borrowerid, String savingid){
         try {
             storage = context.getSharedPreferences(LIFOUTA_MEMORY,Context.MODE_PRIVATE).edit();
-            storage.putString("saccount",saccount);
+            storage.putString("borrowerid",borrowerid);
             storage.putString("savingid",savingid);
             storage.commit();
             return true;
