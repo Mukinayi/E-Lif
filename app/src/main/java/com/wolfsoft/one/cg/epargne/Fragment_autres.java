@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 import com.wolfsoft.one.cg.R;
@@ -31,8 +34,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 
 /**
  * Created by EXACT-IT-DEV on 4/9/2018.
@@ -46,9 +57,11 @@ public class Fragment_autres extends Fragment {
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     ProgressDialog pDialog;
+    ArrayList<String> labels = new ArrayList<String>();
+    ArrayList<BarEntry> entries = new ArrayList<>();
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fautres = inflater.inflate(R.layout.fragment_autres,container,false);
         context = getContext();
         networkConnection = new NetworkConnection(context);
@@ -258,6 +271,162 @@ public class Fragment_autres extends Fragment {
                 }
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+// you can directly pass Date objects to DataPoint-Constructor
+// this will convert the Date to double via Date#getTime()
+        final HashMap<String,Double> ret = new HashMap();
+        final HashMap hashMap = new HashMap();
+        hashMap.put("savingsid",networkConnection.storedDatas("savingid"));
+        if(networkConnection.isConnected()){
+            try {
+                PostResponseAsyncTask tach = new PostResponseAsyncTask(context, hashMap, false, new AsyncResponse() {
+                    @Override
+                    public void processFinish(String s) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(s);
+                            if(jsonArray.length() <=0){
+                                networkConnection.writeToast("Aucune donnée disponible");
+                            }else{
+
+                                for(int i = 0; i < jsonArray.length(); i++){
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    ret.put(jsonObject.getString("date"),jsonObject.getDouble("amount"));
+                                    //entries.add(new BarEntry((float)jsonObject.getDouble("amount"), i));
+                                    //labels.add(jsonObject.getString("date"));
+                                }
+                            }
+                        }catch (JSONException e){
+                            networkConnection.writeToast("Erreur des données");
+                        }
+                        Log.i("retour",s);
+                    }
+                });
+                tach.execute(networkConnection.getUrl()+"loanapi/APIS/savingstransactionsreport.php");
+            }catch (Exception e){
+                networkConnection.writeToast("Erreur connexion serveur");
+            }
+        }else{
+            networkConnection.writeToast("Aucune connexion internet");
+        }
+
+        /*String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+        String incDate;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(sdf.parse(timeStamp));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //int maxDay = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+        /*int maxDay = c.get(Calendar.DATE);
+        for(int co=1; co<=maxDay; co++){
+            c.add((Calendar.DATE), -1);
+            incDate = sdf.format(c.getTime());
+            labels.add(incDate);
+        }
+
+        for (Map.Entry<String, Double> entry : ret.entrySet()) {
+            String key = entry.getKey();
+            double value = entry.getValue();
+            if(ret.size()!=maxDay){
+                for(int d =1;d<=maxDay;d++){
+                    entries.add(new BarEntry((float)value,d));
+                }
+            }
+        }*/
+
+        entries.add(new BarEntry(4f, 0));
+        entries.add(new BarEntry(8f, 1));
+        entries.add(new BarEntry(6f, 2));
+        entries.add(new BarEntry(12f, 3));
+        entries.add(new BarEntry(18f, 4));
+        entries.add(new BarEntry(9f, 5));
+
+        labels.add("Janvier");
+        labels.add("Fevrier");
+        labels.add("Mars");
+        labels.add("Avril");
+        labels.add("Mai");
+        labels.add("Juin");
+        BarDataSet dataset = new BarDataSet(entries, "# Les données");
+        BarChart chart = (BarChart)fautres.findViewById(R.id.chart);
+        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        BarData data = new BarData(labels, dataset);
+        chart.setData(data);
+        //final String URL = networkConnection.getUrl();
+
+        Button btnsoldes = (Button)fautres.findViewById(R.id.btnsoldes);
+        btnsoldes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pDialog = new ProgressDialog(context);
+                pDialog.setCancelable(false);
+                pDialog.setTitle("Demande de solde");
+                pDialog.setMessage("Vérification du solde...");
+                pDialog.show();
+
+                if(networkConnection.isConnected()){
+                    try {
+                        PostResponseAsyncTask sol = new PostResponseAsyncTask(context, hashMap, false, new AsyncResponse() {
+                            @Override
+                            public void processFinish(String s) {
+                                pDialog.dismiss();
+                                switch (s) {
+
+                                    case "":
+                                        networkConnection.writeToast("Aucune reponse du serveur");
+                                        pDialog.dismiss();
+                                        break;
+                                    default:
+                                        pDialog.dismiss();
+                                        alb.setTitle("Solde compte Epargne");
+                                        StringBuilder str = new StringBuilder();
+                                        str.append("Votre solde est de : \n\n\n");
+                                        str.append(String.format("%,.2f", Double.parseDouble(s)) + " CFA");
+                                        alb.setMessage(str.toString());
+                                        alb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                        dialog = alb.create();
+                                        dialog.show();
+                                }
+                                Log.i("solde",s);
+                            }
+                        });
+                        sol.execute(URL+"loanapi/APIS/solde.php");
+
+
+                    }catch(Exception e){
+                        networkConnection.writeToast("Erreur connexion serveur");
+                    }
+                }else{
+                    networkConnection.writeToast("Aucune connexion internet");
+                    pDialog.dismiss();
+                }
+            }
+        });
+
+
+
+
+
+
 
 
 

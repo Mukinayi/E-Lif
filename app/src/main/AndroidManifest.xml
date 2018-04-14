@@ -13,29 +13,30 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".splashscreen.SpalshScreen">
+        <activity android:name=".splashscreen.SpalshScreen" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".virement.Virement" />
-        <activity android:name=".NavigationActivity" />
-        <activity android:name=".splashscreen.NoImei" />
+        <activity android:name=".virement.Virement" android:screenOrientation="portrait"/>
+        <activity android:name=".NavigationActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".splashscreen.NoImei" android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".login.Login" />
-        <activity android:name=".login.ConfirmationConnexion" />
-        <activity android:name=".payment.Payment" />
-        <activity android:name=".payment.Confirmation" />
-        <activity android:name=".transfert.Transfert" />
-        <activity android:name=".credits.Credits" />
+        <activity android:name=".login.Login" android:screenOrientation="portrait"/>
+        <activity android:name=".login.ConfirmationConnexion" android:screenOrientation="portrait"/>
+        <activity android:name=".payment.Payment" android:screenOrientation="portrait"/>
+        <activity android:name=".payment.Confirmation" android:screenOrientation="portrait"/>
+        <activity android:name=".transfert.Transfert" android:screenOrientation="portrait"/>
+        <activity android:name=".credits.Credits" android:screenOrientation="portrait"/>
         <activity
-            android:name=".epargne.MainActivity"/>
+            android:name=".epargne.MainActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
