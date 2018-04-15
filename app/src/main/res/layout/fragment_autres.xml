@@ -387,7 +387,7 @@
         android:layout_height="match_parent"
         android:id="@+id/mainlay"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@color/white">
 
         <ScrollView

@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
 import com.wolfsoft.one.cg.credits.Credits;
+import com.wolfsoft.one.cg.epargne.FromCCtoSC;
 import com.wolfsoft.one.cg.epargne.MainActivity;
 import com.wolfsoft.one.cg.network.NetworkConnection;
 import com.wolfsoft.one.cg.payment.Payment;
@@ -56,7 +57,7 @@ public class NavigationActivity extends AppCompatActivity {
 
 
     private String[] NAME = {"Mon solde", "Virement" , "Transfert", "Payer", "Crédits Téléphone", "Demande crédit","Compte Epargne",
-            "Paiement SNE","Paiement SNDE","Bouquets numériques"
+            "Deposit compte épargne","Paiement SNE","Paiement SNDE","Bouquets numériques"
            };
 
 
@@ -142,6 +143,10 @@ public class NavigationActivity extends AppCompatActivity {
                         case 6:
                             Intent epargne = new Intent(NavigationActivity.this, MainActivity.class);
                             startActivity(epargne);
+                            break;
+                        case 7:
+                            Intent depositsav = new Intent(NavigationActivity.this, FromCCtoSC.class);
+                            startActivity(depositsav);
                             break;
                     }
                     drawerLayout.closeDrawer(relativeClose);

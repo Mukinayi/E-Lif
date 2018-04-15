@@ -30,6 +30,7 @@ public class NetworkConnection {
     SharedPreferences.Editor storage;
     SharedPreferences sharedPreferences;
     private static final String LIFOUTA_MEMORY = "LIFOUTA_MEMORY";
+    public static final String RECIPIENT_ACCOUNT = "242053070250";
 
     public NetworkConnection(Context context) {
         this.context = context;

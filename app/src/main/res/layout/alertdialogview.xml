@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:textColor="@color/blue"
+        android:textSize="22sp"
+        android:text="Confirmation de déposit"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp"/>-->
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/etcodeconfpay"
+        android:inputType="numberPassword"
+        android:hint="code OTP"
+        android:layout_marginBottom="10dp"/>
+
+
+
+        <Button
+            android:id="@+id/btndialogconfig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="Valider"
+            android:textColor="@color/white"
+            android:layout_marginTop="8dp"/>
+
+        <ImageButton
+            android:layout_marginTop="20dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/imgdialogresend"
+            android:background="@drawable/resend"
+            android:layout_gravity="center_horizontal"/>
+
+
+
+
+
+</LinearLayout>

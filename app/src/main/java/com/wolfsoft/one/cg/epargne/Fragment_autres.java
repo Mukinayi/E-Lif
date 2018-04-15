@@ -59,6 +59,7 @@ public class Fragment_autres extends Fragment {
     ProgressDialog pDialog;
     ArrayList<String> labels = new ArrayList<String>();
     ArrayList<BarEntry> entries = new ArrayList<>();
+    HashMap hashMap;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -124,6 +125,39 @@ public class Fragment_autres extends Fragment {
             }else {
                 mainlay.animate().rotation(360f).setDuration(1500);
                 mainlay.setVisibility(View.VISIBLE);
+                hashMap = new HashMap();
+                hashMap.put("savingsid",networkConnection.storedDatas("savingid"));
+                if(networkConnection.isConnected()){
+                    try {
+                        PostResponseAsyncTask tach = new PostResponseAsyncTask(context, hashMap, false, new AsyncResponse() {
+                            @Override
+                            public void processFinish(String s) {
+                                try {
+                                    JSONArray jsonArray = new JSONArray(s);
+                                    if(jsonArray.length() <=0){
+                                        networkConnection.writeToast("Aucune donnée disponible");
+                                    }else{
+
+                                        for(int i = 0; i < jsonArray.length(); i++){
+                                            //JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                            //ret.put(jsonObject.getString("date"),jsonObject.getDouble("amount"));
+                                            //entries.add(new BarEntry((float)jsonObject.getDouble("amount"), i));
+                                            //labels.add(jsonObject.getString("date"));
+                                        }
+                                    }
+                                }catch (JSONException e){
+                                    networkConnection.writeToast("Erreur des données");
+                                }
+                                Log.i("retour",s);
+                            }
+                        });
+                        tach.execute(networkConnection.getUrl()+"loanapi/APIS/savingstransactionsreport.php");
+                    }catch (Exception e){
+                        networkConnection.writeToast("Erreur connexion serveur");
+                    }
+                }else{
+                    networkConnection.writeToast("Aucune connexion internet");
+                }
             }
         }
         Button btnscreate = (Button)fautres.findViewById(R.id.btnscreate);
@@ -286,39 +320,7 @@ public class Fragment_autres extends Fragment {
 // you can directly pass Date objects to DataPoint-Constructor
 // this will convert the Date to double via Date#getTime()
         final HashMap<String,Double> ret = new HashMap();
-        final HashMap hashMap = new HashMap();
-        hashMap.put("savingsid",networkConnection.storedDatas("savingid"));
-        if(networkConnection.isConnected()){
-            try {
-                PostResponseAsyncTask tach = new PostResponseAsyncTask(context, hashMap, false, new AsyncResponse() {
-                    @Override
-                    public void processFinish(String s) {
-                        try {
-                            JSONArray jsonArray = new JSONArray(s);
-                            if(jsonArray.length() <=0){
-                                networkConnection.writeToast("Aucune donnée disponible");
-                            }else{
 
-                                for(int i = 0; i < jsonArray.length(); i++){
-                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    ret.put(jsonObject.getString("date"),jsonObject.getDouble("amount"));
-                                    //entries.add(new BarEntry((float)jsonObject.getDouble("amount"), i));
-                                    //labels.add(jsonObject.getString("date"));
-                                }
-                            }
-                        }catch (JSONException e){
-                            networkConnection.writeToast("Erreur des données");
-                        }
-                        Log.i("retour",s);
-                    }
-                });
-                tach.execute(networkConnection.getUrl()+"loanapi/APIS/savingstransactionsreport.php");
-            }catch (Exception e){
-                networkConnection.writeToast("Erreur connexion serveur");
-            }
-        }else{
-            networkConnection.writeToast("Aucune connexion internet");
-        }
 
         /*String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         String incDate;
