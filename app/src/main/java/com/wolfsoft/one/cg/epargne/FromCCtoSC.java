@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +38,7 @@ public class FromCCtoSC extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_from_ccto_sc);
-        /*networkConnection = new NetworkConnection(FromCCtoSC.this);
+        networkConnection = new NetworkConnection(FromCCtoSC.this);
 
         final String URL = networkConnection.getUrl();
 
@@ -114,153 +115,22 @@ public class FromCCtoSC extends AppCompatActivity {
                                                 JSONArray jsonArray = new JSONArray(s);
                                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
 
-                                                //View alview = inflater.inflate(R.layout.alertdialogview,container);
-                                                View alview = getLayoutInflater().inflate(R.layout.alertdialogview,null);
 
-                                                final EditText etcodeconfpay = (EditText)alview.findViewById(R.id.etcodeconfpay);
-
-                                                alb.setView(alview);
 
                                                 final String retOtp = jsonObject.getString("optclient");
                                                 final String recipientaccount = jsonObject.getString("recipientaccount");
                                                 final String transtype = jsonObject.getString("transtype");
                                                 final String senderaccount = jsonObject.getString("senderaccount");
-                                                        alb.setNegativeButton("Confirmer", new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(final DialogInterface dialog, int which) {
-                                                                if(etcodeconfpay.getText().toString().isEmpty()){
-                                                                    networkConnection.writeToast("Veuillez renseigner le code OTP");
-                                                                }else{
-                                                                    pDialog.show();
-                                                                    if(etcodeconfpay.getText().toString() != retOtp){
-                                                                        networkConnection.writeToast("OTP incorrecte");
-                                                                    }else{
-                                                                        HashMap dd = new HashMap();
-                                                                        dd.put("savingsid",networkConnection.storedDatas("savingid"));
-                                                                        dd.put("borrowerid",networkConnection.storedDatas("borrowerid"));
-                                                                        dd.put("recipientaccount",recipientaccount);
-                                                                        dd.put("transtype",transtype);
-                                                                        dd.put("senderaccount",senderaccount);
-                                                                        dd.put("optclient",retOtp);
+                                                final String amount = jsonObject.getString("amount");
 
-                                                                        if(networkConnection.isConnected()){
-                                                                            try {
-                                                                                PostResponseAsyncTask ppt = new PostResponseAsyncTask(FromCCtoSC.this, dd, false, new AsyncResponse() {
-                                                                                    @Override
-                                                                                    public void processFinish(String s) {
-                                                                                        switch (s){
-                                                                                            case "170":
-                                                                                                networkConnection.writeToast("OTP non existant");
-                                                                                                pDialog.dismiss();
-                                                                                                break;
-                                                                                            case "171":
-                                                                                                networkConnection.writeToast("OTP expiré");
-                                                                                                pDialog.dismiss();
-                                                                                                break;
-                                                                                            case "172":
-                                                                                                networkConnection.writeToast("Echec mis à jour");
-                                                                                                pDialog.dismiss();
-                                                                                                break;
-                                                                                            case "173":
-                                                                                                networkConnection.writeToast("Aucune reponse du Payment Gateway");
-                                                                                                pDialog.dismiss();
-                                                                                                break;
-                                                                                            case "201":
-                                                                                                networkConnection.writeToast("Paiement réussie, mais Echec Deposit au compte courant");
-                                                                                                pDialog.dismiss();
-                                                                                                try {
-                                                                                                    Thread.sleep(2000);
-                                                                                                } catch (InterruptedException e) {
-                                                                                                    e.printStackTrace();
-                                                                                                }
-                                                                                                dialog.dismiss();
-                                                                                                break;
-                                                                                            case "":
-                                                                                                networkConnection.writeToast("Paiement réussie, mais serveur");
-                                                                                                pDialog.dismiss();
-                                                                                                try {
-                                                                                                    Thread.sleep(2000);
-                                                                                                } catch (InterruptedException e) {
-                                                                                                    e.printStackTrace();
-                                                                                                }
-                                                                                                dialog.dismiss();
-                                                                                                break;
-                                                                                            default:
-                                                                                                dialog.dismiss();
-                                                                                                networkConnection.writeToast("Déposit effectué avec succès");
-                                                                                                try {
-                                                                                                    Thread.sleep(2000);
-                                                                                                } catch (InterruptedException e) {
-                                                                                                    e.printStackTrace();
-                                                                                                }
-                                                                                                dialog.dismiss();
-                                                                                                break;
-                                                                                        }
-                                                                                    }
-                                                                                });
-                                                                                ppt.execute(URL+"loanapi/APIS/confirmdeposit.php");
-                                                                            }catch (Exception e){
-                                                                                networkConnection.writeToast("Erreur du serveur");
-                                                                                pDialog.dismiss();
-                                                                            }
-                                                                        }else{
-                                                                            networkConnection.writeToast("Erreur connexion internet");
-                                                                            pDialog.dismiss();
-                                                                        }
-
-                                                                    }
-                                                                }
-                                                            }
-                                                        });
-
-                                                        alb.setPositiveButton("Renvoi OTP", new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                HashMap dt = new HashMap();
-                                                                dt.put("senderaccount",senderaccount);
-                                                                dt.put("optclient",retOtp);
-                                                                dt.put("transtype",transtype);
-                                                                pDialog.setTitle("Renvoi OTP");
-                                                                pDialog.show();
-                                                                if(networkConnection.isConnected()){
-                                                                    try {
-                                                                        PostResponseAsyncTask resend = new PostResponseAsyncTask(FromCCtoSC.this, dt, false, new AsyncResponse() {
-                                                                            @Override
-                                                                            public void processFinish(String s) {
-                                                                                try {
-                                                                                    switch (s){
-                                                                                        case "180":
-                                                                                            pDialog.dismiss();
-                                                                                            networkConnection.writeToast("Aucun OTP disponible");
-                                                                                            break;
-                                                                                        case "201":
-                                                                                            pDialog.dismiss();
-                                                                                            networkConnection.writeToast("Echec renvoi OTP");
-                                                                                            break;
-                                                                                        default:
-                                                                                            pDialog.dismiss();
-                                                                                            networkConnection.writeToast("OTP renvoyé avec succès");
-                                                                                            break;
-                                                                                    }
-                                                                                }catch (Exception e){
-                                                                                    pDialog.dismiss();
-                                                                                    networkConnection.writeToast("Aucune reponse du serveur");
-                                                                                }
-                                                                            }
-                                                                        });
-                                                                        resend.execute(URL+"lifoutacourant/APIS/resendsms.php");
-                                                                    }catch (Exception e){
-                                                                        pDialog.dismiss();
-                                                                        networkConnection.writeToast("Erreur connexion au serveur");
-                                                                    }
-                                                                }else{
-                                                                    pDialog.dismiss();
-                                                                    networkConnection.writeToast("Erreur connexion internet");
-                                                                }
-                                                            }
-                                                        });
-                                                dialog = alb.create();
-                                                dialog.show();
+                                                Intent conf = new Intent(FromCCtoSC.this,ConfirmerDeposit.class);
+                                                conf.putExtra("optclient",retOtp);
+                                                conf.putExtra("recipientaccount",recipientaccount);
+                                                conf.putExtra("transtype",transtype);
+                                                conf.putExtra("senderaccount",senderaccount);
+                                                conf.putExtra("amount",amount);
+                                                startActivity(conf);
+                                                finish();
                                             }catch (JSONException je){
                                                 networkConnection.writeToast("Erreur de données");
                                                 Log.i("donnes",s);
@@ -285,6 +155,6 @@ public class FromCCtoSC extends AppCompatActivity {
 
                 }
             }
-        });*/
+        });
     }
 }

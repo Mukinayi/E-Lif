@@ -1,6 +1,7 @@
 package com.wolfsoft.one.cg.epargne;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,13 +41,17 @@ import java.util.zip.Inflater;
  */
 
 public class Fragment_transaction extends Fragment {
-    NetworkConnection networkConnection;
+    /*NetworkConnection networkConnection;
     Context context;
     AlertDialog.Builder alb;
     AlertDialog dialog;
     ProgressDialog pDialog;
     EditText etdepositamount;
     EditText etpincc;
+    ProgressBar progressBar;
+    public String URL;
+    public String retour;
+    public View v;
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -151,137 +156,15 @@ public class Fragment_transaction extends Fragment {
                                                         JSONArray jsonArray = new JSONArray(s);
                                                         JSONObject jsonObject = jsonArray.getJSONObject(0);
 
-                                                        //View alview = inflater.inflate(R.layout.alertdialogview,container);
-                                                        View alview = LayoutInflater.from(context).inflate(R.layout.alertdialogview, null);
-                                                        alb.setView(alview);
-                                                        dialog = alb.create();
-                                                        dialog.show();
-
                                                         final String retOtp = jsonObject.getString("optclient");
                                                         final String recipientaccount = jsonObject.getString("recipientaccount");
                                                         final String transtype = jsonObject.getString("transtype");
                                                         final String senderaccount = jsonObject.getString("senderaccount");
-                                                        final EditText etcodeconfpay = (EditText)alview.findViewById(R.id.etcodeconfpay);
                                                         final String amount = jsonObject.getString("amount");
-                                                        Button btndialogconfig = (Button)alview.findViewById(R.id.btndialogconfig);
-                                                        ImageButton imgdialogresend = (ImageButton)alview.findViewById(R.id.imgdialogresend);
-                                                        final ProgressBar progressBar = (ProgressBar)alview.findViewById(R.id.progressBar);
 
-                                                        btndialogconfig.setOnClickListener(new View.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(View v) {
-                                                                HashMap dd = new HashMap();
-                                                                dd.put("savingsid",networkConnection.storedDatas("savingid"));
-                                                                dd.put("borrowerid",networkConnection.storedDatas("borrowerid"));
-                                                                dd.put("recipientaccount",recipientaccount);
-                                                                dd.put("transtype",transtype);
-                                                                dd.put("senderaccount",senderaccount);
-                                                                dd.put("optclient",retOtp);
-                                                                dd.put("amount",amount);
-
-                                                                if(etcodeconfpay.getText().toString().isEmpty()){
-                                                                    networkConnection.writeToast("Veuillez renseigner le code OTP");
-                                                                }else{
-                                                                    progressBar.setVisibility(View.VISIBLE);
-                                                                    if(networkConnection.isConnected()){
-                                                                        try {
-                                                                            PostResponseAsyncTask ppt = new PostResponseAsyncTask(context, dd, false, new AsyncResponse() {
-                                                                                @Override
-                                                                                public void processFinish(String s) {
-                                                                                    Log.i("jade",s);
-                                                                                    switch (s){
-                                                                                        case "170":
-                                                                                            networkConnection.writeToast("OTP non existant");
-                                                                                            progressBar.setVisibility(View.GONE);
-                                                                                            break;
-                                                                                        case "171":
-                                                                                            networkConnection.writeToast("OTP expiré");
-                                                                                            progressBar.setVisibility(View.GONE);
-                                                                                            break;
-                                                                                        case "172":
-                                                                                            networkConnection.writeToast("Echec mis à jour");
-                                                                                            progressBar.setVisibility(View.GONE);
-                                                                                            break;
-                                                                                        case "173":
-                                                                                            networkConnection.writeToast("Aucune reponse du Payment Gateway");
-                                                                                            progressBar.setVisibility(View.GONE);
-                                                                                            break;
-                                                                                        case "201":
-                                                                                            networkConnection.writeToast("Paiement réussie, mais Echec Deposit au compte courant");
-                                                                                            progressBar.setVisibility(View.GONE);
-                                                                                            break;
-                                                                                        case "":
-                                                                                            networkConnection.writeToast("Paiement réussie, mais serveur");
-                                                                                            progressBar.setVisibility(View.GONE);
-                                                                                            break;
-                                                                                        default:
-                                                                                            //dialog.dismiss();
-                                                                                            networkConnection.writeToast("Déposit effectué avec succès");
-                                                                                            progressBar.setVisibility(View.GONE);
-                                                                                            break;
-                                                                                    }
-                                                                                }
-                                                                            });
-                                                                            ppt.execute(URL+"loanapi/APIS/confirmdeposit.php");
-                                                                        }catch (Exception e){
-                                                                            networkConnection.writeToast("Erreur du serveur");
-                                                                            pDialog.dismiss();
-                                                                        }
-                                                                    }else{
-                                                                        networkConnection.writeToast("Erreur connexion internet");
-                                                                        pDialog.dismiss();
-                                                                    }
-                                                                }
-                                                            }
-                                                        });
-
-                                                        imgdialogresend.setOnClickListener(new View.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(View v) {
-                                                                HashMap dt = new HashMap();
-                                                                dt.put("senderaccount",senderaccount);
-                                                                dt.put("optclient",retOtp);
-                                                                dt.put("transtype",transtype);
-                                                                pDialog.setTitle("Renvoi OTP");
-                                                                pDialog.show();
-                                                                if(networkConnection.isConnected()){
-                                                                    try {
-                                                                        PostResponseAsyncTask resend = new PostResponseAsyncTask(context, dt, false, new AsyncResponse() {
-                                                                            @Override
-                                                                            public void processFinish(String s) {
-                                                                                try {
-                                                                                    switch (s){
-                                                                                        case "180":
-                                                                                            pDialog.dismiss();
-                                                                                            networkConnection.writeToast("Aucun OTP disponible");
-                                                                                            break;
-                                                                                        case "201":
-                                                                                            pDialog.dismiss();
-                                                                                            networkConnection.writeToast("Echec renvoi OTP");
-                                                                                            break;
-                                                                                        default:
-                                                                                            pDialog.dismiss();
-                                                                                            networkConnection.writeToast("OTP renvoyé avec succès");
-                                                                                            break;
-                                                                                    }
-                                                                                }catch (Exception e){
-                                                                                    pDialog.dismiss();
-                                                                                    networkConnection.writeToast("Aucune reponse du serveur");
-                                                                                }
-                                                                            }
-                                                                        });
-                                                                        resend.execute(URL+"lifoutacourant/APIS/resendsms.php");
-                                                                    }catch (Exception e){
-                                                                        pDialog.dismiss();
-                                                                        networkConnection.writeToast("Erreur connexion au serveur");
-                                                                    }
-                                                                }else{
-                                                                    pDialog.dismiss();
-                                                                    networkConnection.writeToast("Erreur connexion internet");
-                                                                }
-                                                            }
-                                                        });
-
+                                                        Confirmdeposit confirmdeposit = new Confirmdeposit();
+                                                        android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                                                        fragmentManager.beginTransaction().replace(R.id.main_frag,confirmdeposit).commit();
 
                                                     }catch (JSONException je){
                                                         networkConnection.writeToast("Erreur de données");
@@ -311,7 +194,40 @@ public class Fragment_transaction extends Fragment {
 
             }
         }
+
+
+
         return ftransactions;
     }
+
+    public String Confirmer(String recipientaccount,String transtype,String senderaccount,String retOtp){
+        networkConnection = new NetworkConnection(getContext());
+        HashMap dd = new HashMap();
+        //dd.put("savingsid",networkConnection.storedDatas("savingid"));
+        //dd.put("borrowerid",networkConnection.storedDatas("borrowerid"));
+        dd.put("recipientaccount",recipientaccount);
+        dd.put("transtype",transtype);
+        dd.put("senderaccount",senderaccount);
+        dd.put("optclient",retOtp);
+        //dd.put("amount",amount);
+        if(networkConnection.isConnected()){
+            try {
+                PostResponseAsyncTask ppt = new PostResponseAsyncTask(context, dd, false, new AsyncResponse() {
+                    @Override
+                    public void processFinish(final String s) {
+                        retour = s;
+                    }
+                });
+                ppt.execute(networkConnection.getUrl()+"loanapi/APIS/confirmtransaction.php");
+            }catch (Exception e){
+                networkConnection.writeToast("Erreur du serveur");
+                pDialog.dismiss();
+            }
+        }else{
+            networkConnection.writeToast("Erreur connexion internet");
+            pDialog.dismiss();
+        }
+        return retour;
+    }*/
 
 }

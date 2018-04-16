@@ -57,7 +57,9 @@
         <activity
             android:name=".epargne.MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".epargne.FromCCtoSC"></activity>
+        <activity android:name=".epargne.FromCCtoSC" />
+        <activity android:name=".epargne.ConfirmerDeposit" />
+        <activity android:name=".epargne.ConfirmationTransactionDeposit"></activity>
     </application>
 
 </manifest>
