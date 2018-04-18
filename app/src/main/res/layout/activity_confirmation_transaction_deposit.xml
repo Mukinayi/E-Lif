@@ -36,6 +36,6 @@
         android:background="@color/blue"
         android:gravity="center"
         android:padding="20dp"
-        android:text="Clquez pour valider"
-        android:textColor="@color/white" />
+        android:text="Cliquez pour valider"
+        android:textColor="@color/white"/>
 </LinearLayout>

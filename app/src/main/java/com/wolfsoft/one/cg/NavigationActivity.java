@@ -22,11 +22,18 @@ import android.widget.RelativeLayout;
 
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
+import com.wolfsoft.one.cg.bouquets.Canalplus;
+import com.wolfsoft.one.cg.bouquets.Easytv;
+import com.wolfsoft.one.cg.bouquets.Startimes;
+import com.wolfsoft.one.cg.credit.DemandeCredit;
 import com.wolfsoft.one.cg.credits.Credits;
 import com.wolfsoft.one.cg.epargne.FromCCtoSC;
 import com.wolfsoft.one.cg.epargne.MainActivity;
+import com.wolfsoft.one.cg.moncompte.ChangePin;
 import com.wolfsoft.one.cg.network.NetworkConnection;
 import com.wolfsoft.one.cg.payment.Payment;
+import com.wolfsoft.one.cg.servicespublics.Snde;
+import com.wolfsoft.one.cg.servicespublics.Sne;
 import com.wolfsoft.one.cg.transfert.Transfert;
 import com.wolfsoft.one.cg.virement.Virement;
 
@@ -57,7 +64,7 @@ public class NavigationActivity extends AppCompatActivity {
 
 
     private String[] NAME = {"Mon solde", "Virement" , "Transfert", "Payer", "Crédits Téléphone", "Demande crédit","Compte Epargne",
-            "Deposit compte épargne","Paiement SNE","Paiement SNDE","Bouquets numériques"
+            "Deposit compte épargne","Canal+","Easy-Tv","Startimes","Paiement SNE","Paiement SNDE","Changement PIN"
            };
 
 
@@ -136,8 +143,8 @@ public class NavigationActivity extends AppCompatActivity {
                             break;
 
                         case 5:
-                            //Intent demandescredit = new Intent(NavigationActivity.this, Credits.class);
-                            //startActivity(demandescredit);
+                            Intent demandescredit = new Intent(NavigationActivity.this, DemandeCredit.class);
+                            startActivity(demandescredit);
                             break;
 
                         case 6:
@@ -148,6 +155,31 @@ public class NavigationActivity extends AppCompatActivity {
                             Intent depositsav = new Intent(NavigationActivity.this, FromCCtoSC.class);
                             startActivity(depositsav);
                             break;
+                        case 8:
+                            Intent canalplus = new Intent(NavigationActivity.this, Canalplus.class);
+                            startActivity(canalplus);
+                            break;
+                        case 9:
+                            Intent easyty = new Intent(NavigationActivity.this, Easytv.class);
+                            startActivity(easyty);
+                            break;
+                        case 10:
+                            Intent startimes = new Intent(NavigationActivity.this, Startimes.class);
+                            startActivity(startimes);
+                            break;
+                        case 11:
+                            Intent sne = new Intent(NavigationActivity.this, Sne.class);
+                            startActivity(sne);
+                            break;
+                        case 12:
+                            Intent snde = new Intent(NavigationActivity.this, Snde.class);
+                            startActivity(snde);
+                            break;
+                        case 13:
+                            Intent cpin = new Intent(NavigationActivity.this, ChangePin.class);
+                            startActivity(cpin);
+                            break;
+
                     }
                     drawerLayout.closeDrawer(relativeClose);
                 }

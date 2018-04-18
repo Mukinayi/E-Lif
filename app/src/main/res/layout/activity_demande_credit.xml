@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.wolfsoft.one.cg.credit.DemandeCredit"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="250dp"
+        android:layout_height="211dp"
+        android:layout_above="@+id/linearLayout"
+        android:layout_gravity="center_horizontal"
+        app:srcCompat="@drawable/ifuta" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Cher client, veuillez vous présenter dans une agence Lifouta pour la création du dossier de demande de crédit, ainsi vous pouvez voir les détails du dossiers dans l'application"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:background="@drawable/contourlayout"
+        android:padding="5dp"/>
+
+</LinearLayout>

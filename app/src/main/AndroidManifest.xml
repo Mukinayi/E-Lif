@@ -59,7 +59,14 @@
             android:screenOrientation="portrait" />
         <activity android:name=".epargne.FromCCtoSC" />
         <activity android:name=".epargne.ConfirmerDeposit" />
-        <activity android:name=".epargne.ConfirmationTransactionDeposit"></activity>
+        <activity android:name=".epargne.ConfirmationTransactionDeposit" />
+        <activity android:name=".bouquets.Canalplus" />
+        <activity android:name=".bouquets.Easytv" />
+        <activity android:name=".bouquets.Startimes" />
+        <activity android:name=".servicespublics.Sne" />
+        <activity android:name=".servicespublics.Snde" />
+        <activity android:name=".credit.DemandeCredit" />
+        <activity android:name=".moncompte.ChangePin"></activity>
     </application>
 
 </manifest>

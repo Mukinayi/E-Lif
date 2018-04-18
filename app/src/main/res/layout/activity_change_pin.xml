@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.wolfsoft.one.cg.moncompte.ChangePin"
+    android:orientation="vertical"
+    android:background="@drawable/signup_background">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/linearLayout">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_above="@+id/linearLayout"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/ifuta" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:padding="12dp"
+                android:text="Changement PIN"
+                android:textColor="@color/dullWhite"
+                android:textSize="30sp" />
+
+
+            <EditText
+                android:id="@+id/etoldpass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:background="@color/fullTransparent"
+                android:drawableLeft="@drawable/ic_avatar"
+                android:drawablePadding="8dp"
+                android:hint="PIN actuel"
+                android:inputType="numberPassword"
+                android:padding="12dp"
+                android:textColor="#fff"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/textSize" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/divider"></LinearLayout>
+
+            <EditText
+                android:id="@+id/etnewpin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:background="@color/fullTransparent"
+                android:drawableLeft="@drawable/ic_avatar"
+                android:drawablePadding="8dp"
+                android:hint="Nouveau PIN"
+                android:inputType="numberPassword"
+                android:padding="12dp"
+                android:textColor="#fff"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/textSize" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/divider"></LinearLayout>
+
+            <EditText
+                android:id="@+id/etconfpin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:background="@color/fullTransparent"
+                android:drawableLeft="@drawable/ic_avatar"
+                android:drawablePadding="8dp"
+                android:hint="Confirmer nouveau PIN"
+                android:inputType="numberPassword"
+                android:padding="12dp"
+                android:textColor="#fff"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/textSize" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/divider"></LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnchangepin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/blue"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="@string/valider"
+                android:textColor="@color/white" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+    </ScrollView>
+
+</LinearLayout>
